@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+
+
+class CustomTheme {
+  static ThemeData theme() {
+    return ThemeData(
+      primaryColor: Colors.black,
+      inputDecorationTheme: InputDecorationTheme(
+          hintStyle: const TextStyle(fontSize: 16.0, color: Colors.grey, fontWeight: FontWeight.normal),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: const BorderSide(
+              width: 0,
+              style: BorderStyle.none,
+            ),
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          labelStyle: const TextStyle(fontSize: 18.0, color: Colors.black),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: const BorderSide(
+              color: Colors.white,
+              width: 2.0,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: const BorderSide(
+              color: Colors.white,
+            ),
+          ),
+          errorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(width: 2, color: Colors.red)),
+          focusedErrorBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(width: 2, color: Colors.red)),
+          errorStyle: const TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
+          disabledBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderSide: BorderSide(width: 2, color: Colors.grey)),
+          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)),
+
+      buttonTheme: const ButtonThemeData(
+          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
+          buttonColor: Colors.black,
+          textTheme: ButtonTextTheme.primary,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0)))),
+
+      textButtonTheme: const TextButtonThemeData(
+      ),
+
+      textTheme: const TextTheme(
+          button: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 2, fontSize: 20)),
+
+      dividerTheme: const DividerThemeData(
+          color: Color.fromRGBO(0, 0, 0, 0.16),
+          thickness: 1.5
+      ),
+
+      cardTheme: CardTheme(
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.white70, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 8,
+        margin: const EdgeInsets.all(10.0),
+      ),
+    );
+  }
+}
+
