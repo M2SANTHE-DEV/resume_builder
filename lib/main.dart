@@ -9,5 +9,5 @@ void main() async{
   //     debug: true // optional: set false to disable printing logs to console
   // );
 
-  runApp(ResumeBuilder());
+  runApp(const ResumeBuilder());
 }

@@ -18,8 +18,7 @@ class EmploymentDetails {
   var noticePeriodController = TextEditingController();
   var currentCompany = Constants.companyDetails.first.value;
 
-  EmploymentDetails(this.designationController,this.organizationController,this.startDateController,this.endDateController,
-      this.salaryController,this.skillsController,this.jobProfileController,this.noticePeriodController);
+  EmploymentDetails();
 }
 
 class EducationDetails {
@@ -30,8 +29,7 @@ class EducationDetails {
   var passingOutYearController = TextEditingController();
   var gradesMarksController = TextEditingController();
 
-  EducationDetails(this.educationController,this.universityController,this.gradesMarksController,
-      this.courseController,this.specializationController,this.passingOutYearController);
+  EducationDetails();
 }
 
 class ProjectDetails {
@@ -43,8 +41,7 @@ class ProjectDetails {
   var projectDetailsController = TextEditingController();
   var projectStatus = Constants.projectStatus.first.value;
 
-  ProjectDetails(this.projectTitleController,this.projectEducationEmploymentController,this.clientController,
-      this.projectStartDateController,this.projectEndDateController,this.projectDetailsController);
+  ProjectDetails();
 }
 
 

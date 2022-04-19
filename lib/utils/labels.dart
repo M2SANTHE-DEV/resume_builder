@@ -1,4 +1,6 @@
 class Labels {
+  static const String resumeDetails = "Resume Details";
+  static const String previewResumeDetails = "Preview Resume Details";
   static const String details = 'Details';
   static const String resumeHeadLine = 'Resume Headline';
   static const String hintResumeHeadLine = 'Type Resume Headline';
@@ -43,4 +45,5 @@ class Labels {
   static const String dobFormat = 'DD/MM/YYYY';
   static const String gender = 'Gender';
   static const String submit = 'Submit';
+  static const String preview = 'Preview';
 }

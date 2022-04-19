@@ -13,14 +13,14 @@ class ResumeBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ResumeProvider(),),
+        ChangeNotifierProvider(create: (_) => ResumeProvider()),
       ],
       child: MaterialApp(
-          key: Key('material_app'),
+          key: const Key('material_app'),
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
           theme: CustomTheme.theme(),
-          home: ResumeDetails(),
+          home: const ResumeDetails(),
           onGenerateRoute: generateRoute),
     );
   }

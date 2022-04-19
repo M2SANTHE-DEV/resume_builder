@@ -1,11 +1,14 @@
 import 'package:build_resume/providers/resume_provider.dart';
-import 'package:build_resume/utils/TextFiledBuilder.dart';
+import 'package:build_resume/widget/TextFiledBuilder.dart';
 import 'package:build_resume/utils/constants.dart';
 import 'package:build_resume/utils/labels.dart';
 import 'package:build_resume/utils/models.dart';
+import 'package:build_resume/widget/common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+
+import '../utils/routes.dart';
 
 class ResumeDetails extends StatefulWidget {
   const ResumeDetails({Key? key}) : super(key: key);
@@ -14,38 +17,14 @@ class ResumeDetails extends StatefulWidget {
   _ResumeDetailsState createState() => _ResumeDetailsState();
 }
 
-var headlineController = TextEditingController();
 
 class _ResumeDetailsState extends State<ResumeDetails> {
   @override
   void initState() {
     var provider = Provider.of<ResumeProvider>(context, listen: false);
-    provider.employmentDetails.add(EmploymentDetails(
-      provider.designationController,
-      provider.organizationController,
-      provider.startDateController,
-      provider.endDateController,
-      provider.salaryController,
-      provider.skillsController,
-      provider.jobProfileController,
-      provider.noticePeriodController,
-    ));
-    provider.educationDetails.add(EducationDetails(
-      provider.educationController,
-      provider.courseController,
-      provider.specializationController,
-      provider.universityController,
-      provider.passingOutYearController,
-      provider.gradesMarksController,
-    ));
-    provider.projectDetails.add(
-        ProjectDetails(provider.projectTitleController,
-          provider.projectEducationEmploymentController,
-          provider.clientController,
-          provider.projectStartDateController,
-          provider.projectEndDateController,
-          provider.projectDetailsController,
-    ));
+    provider.employmentDetails.add(EmploymentDetails());
+    provider.educationDetails.add(EducationDetails());
+    provider.projectDetails.add(ProjectDetails());
     super.initState();
   }
 
@@ -57,7 +36,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
       appBar: AppBar(
         shadowColor: Colors.white,
         backgroundColor: Colors.white,
-        title: Text("Resume Details",
+        title: Text(Labels.resumeDetails,
             style: Theme.of(context).textTheme.subtitle2?.apply(
                 color: Colors.black, fontSizeDelta: 8, fontWeightDelta: 1)),
         centerTitle: true,
@@ -89,7 +68,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
     return Wrap(
       runSpacing: 14,
       children: [
-        _buildHeaderText(Labels.employment),
+        CommonWidget().buildHeaderText(Labels.employment),
         _buildEmploymentInputs(),
         getAddButton(Labels.add + Labels.employment.toUpperCase(), provider.onClickOfAddEmployment)
       ],
@@ -102,7 +81,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
     return Wrap(
       runSpacing: 14,
       children: [
-        _buildHeaderText(Labels.personalDetails),
+        CommonWidget().buildHeaderText(Labels.personalDetails),
         BuildTextField(Labels.dob, provider.dobController,hint: Labels.dobFormat,),
         _buildGender(),
         BuildTextField(Labels.permanentAddress, provider.permanentAddressController,hint: Labels.type + Labels.permanentAddress,),
@@ -122,7 +101,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
     return Wrap(
       runSpacing: 14,
       children: [
-        _buildHeaderText(Labels.education),
+        CommonWidget().buildHeaderText(Labels.education),
         _buildEducationInputs(),
         getAddButton(Labels.add + Labels.education.toUpperCase(), provider.onClickOfAddEducation)
       ],
@@ -130,14 +109,12 @@ class _ResumeDetailsState extends State<ResumeDetails> {
   }
 
   Widget _buildProjectDetails(){
-    var provider = Provider.of<ResumeProvider>(context, listen: false);
-
     return Wrap(
       runSpacing: 14,
       children: [
-        _buildHeaderText(Labels.projects),
+        CommonWidget().buildHeaderText(Labels.projects),
         _buildProjectInputs(),
-        getAddButton(Labels.add + Labels.projects.toUpperCase(), provider.onClickOfAddProject)
+        getAddButton(Labels.add + Labels.projects.toUpperCase(), Provider.of<ResumeProvider>(context, listen: false).onClickOfAddProject)
       ],
     );
   }
@@ -152,7 +129,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          _buildLabelText(label, fontColor : Colors.blue),
+          CommonWidget().buildLabelText(label, fontColor : Colors.blue),
           Container(
             width: 38,
             height: 40,
@@ -336,7 +313,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
       spacing: 10,
       direction: Axis.vertical,
       children: [
-        _buildLabelText(Labels.currentCompany),
+        CommonWidget().buildLabelText(Labels.currentCompany),
         _buildRadioButtons(Constants.companyDetails, companyStatus.currentCompany,(val) => provider.onChangeOfCompanyDetails(val, companyStatus))
       ],
     ));
@@ -347,35 +324,26 @@ class _ResumeDetailsState extends State<ResumeDetails> {
       spacing: 10,
       direction: Axis.vertical,
       children: [
-        _buildLabelText(Labels.projectStatus),
+        CommonWidget().buildLabelText(Labels.projectStatus),
         _buildRadioButtons(Constants.projectStatus, projectDetail.projectStatus,(val) => provider.onChangeOfProjectStatus(val, projectDetail))
       ],
     ));
   }
 
   Widget _buildGender(){
-    return Consumer<ResumeProvider>(builder: (_,provider, child) => Container(
+    return Consumer<ResumeProvider>(builder: (_,provider, child) => SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Wrap(
         spacing: 10,
         direction: Axis.vertical,
         children: [
-          _buildLabelText(Labels.gender),
+          CommonWidget().buildLabelText(Labels.gender),
           _buildRadioButtons(Constants.gender, provider.gender,(val) => provider.onChangeOfGender(val))
         ],
       ),
     ));
   }
 
-
-
-  Widget _buildHeaderText(String text){
-    return Text(text, style: Theme.of(context).textTheme.subtitle1?.apply(color: Colors.black,fontSizeDelta: 5));
-  }
-
-  Widget _buildLabelText(String text, {Color? fontColor}){
-    return Text(text, style: Theme.of(context).textTheme.subtitle1?.apply(color: fontColor ?? Colors.black,fontSizeDelta: 1));
-  }
 
   Widget _buildRadioButtons(List<RadioModel> radioButtonsList, String groupValue,
       void Function(String? v)? onChanged) {
@@ -409,7 +377,10 @@ class _ResumeDetailsState extends State<ResumeDetails> {
   _buildSubmitButton(){
      return Padding(
        padding: const EdgeInsets.all(8.0),
-       child: Center(child: OutlinedButton(onPressed: (){}, child: const Text(Labels.submit))),
+       child: Center(child: OutlinedButton(onPressed: () => Navigator.pushNamed(
+         context,
+         Routes.previewDetails,
+       ), child: Text(Labels.preview.toUpperCase()))),
      );
 
   }

@@ -63,37 +63,18 @@ class ResumeProvider extends ChangeNotifier {
   }
 
   void onClickOfAddEmployment(){
-    employmentDetails.add(EmploymentDetails(designationController,
-      organizationController,
-      startDateController,
-      endDateController,
-      salaryController,
-      skillsController,
-      jobProfileController,
-      noticePeriodController,));
+    employmentDetails.add(EmploymentDetails());
     notifyListeners();
   }
 
   void onClickOfAddEducation(){
-    educationDetails.add(EducationDetails(educationController,
-      courseController,
-      specializationController,
-      universityController,
-      passingOutYearController,
-      gradesMarksController,
-      ));
+    educationDetails.add(EducationDetails());
     notifyListeners();
   }
 
 
   void onClickOfAddProject(){
-    projectDetails.add(ProjectDetails(projectTitleController,
-      projectEducationEmploymentController,
-      clientController,
-      projectStartDateController,
-      projectEndDateController,
-      projectDetailsController,
-    ));
+    projectDetails.add(ProjectDetails());
     notifyListeners();
   }
 
