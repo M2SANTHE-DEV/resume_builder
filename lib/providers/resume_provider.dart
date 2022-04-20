@@ -88,7 +88,23 @@ class ResumeProvider extends ChangeNotifier {
         lastDate:  DateTime.now());
     if (picked != null) {
       controller.text =
-          DateFormat("dd-MMM-yyyy").format(picked).toString();
+          DateFormat("dd-MM-yyyy").format(picked).toString();
     }
+  }
+
+  clearAllDetails(){
+    employmentDetails.clear();
+    educationDetails.clear();
+    projectDetails.clear();
+    resumeHeadlineController.clear();
+    keySkillsController.clear();
+    dobController.clear();
+    permanentAddressController.clear();
+    hometownController.clear();
+    pincodeController.clear();
+    martialStatusController.clear();
+    categoryController.clear();
+    languageController.clear();
+    gender = Constants.gender.first.value;
   }
 }

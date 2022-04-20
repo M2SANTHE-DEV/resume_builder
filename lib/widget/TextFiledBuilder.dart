@@ -11,10 +11,11 @@ class BuildTextField extends StatefulWidget {
   final List<FilteringTextInputFormatter>? inputFormatter;
   final TextInputType? textInputType;
   final int? maxLines;
+  final TextStyle? applyStyling;
 
 
   const BuildTextField(this.labelText, this.controller,
-      {this.hint, this.validator, this.inputFormatter, this.textInputType,this.maxLines});
+      {this.hint, this.validator, this.inputFormatter, this.textInputType,this.maxLines, this.applyStyling});
 
   @override
   _BuildTextFieldState createState() => _BuildTextFieldState();
@@ -26,7 +27,7 @@ class _BuildTextFieldState extends State<BuildTextField> {
     return Wrap(
       runSpacing : 10,
       children: [
-        Text(widget.labelText, style: Theme.of(context).textTheme.subtitle1?.apply(color: Colors.black,fontSizeDelta: 1),),
+        Text(widget.labelText, style: widget.applyStyling ?? Theme.of(context).textTheme.subtitle1?.apply(color: Colors.black,fontSizeDelta: 1),),
         buildInputField(widget.controller,
             validator: widget.validator,
             hint:widget.hint,

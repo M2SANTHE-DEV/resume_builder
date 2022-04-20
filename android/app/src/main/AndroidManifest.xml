@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.build_resume">
    <application
-        android:label="build_resume"
+        android:label="Build Resume"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

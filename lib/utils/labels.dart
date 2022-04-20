@@ -5,7 +5,6 @@ class Labels {
   static const String resumeHeadLine = 'Resume Headline';
   static const String hintResumeHeadLine = 'Type Resume Headline';
   static const String keySkills = 'Key Skills';
-  static const String keySkillsHint = "Please separate Skills with ','";
   static const String designation = 'Your Designation';
   static const String organization = 'Your Organization';
   static const String type = 'Type ';
@@ -46,4 +45,5 @@ class Labels {
   static const String gender = 'Gender';
   static const String submit = 'Submit';
   static const String preview = 'Preview';
+  static const String okay = 'Okay';
 }
