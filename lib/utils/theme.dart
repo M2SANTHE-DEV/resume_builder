@@ -4,10 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class CustomTheme {
-  static ThemeData theme() {
+  static ThemeData theme(BuildContext context) {
     return ThemeData(
       primaryTextTheme: GoogleFonts.latoTextTheme(
-        Theme.of(navigatorKey.currentContext!).textTheme,
+        Theme.of(context).textTheme,
       ),
       primaryColor: Colors.black,
       inputDecorationTheme: InputDecorationTheme(

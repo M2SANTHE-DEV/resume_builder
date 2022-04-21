@@ -19,7 +19,7 @@ class ResumeBuilder extends StatelessWidget {
           key: const Key('material_app'),
           debugShowCheckedModeBanner: false,
           navigatorKey: navigatorKey,
-          theme: CustomTheme.theme(),
+          theme: CustomTheme.theme(context),
           home: const ResumeDetails(),
           onGenerateRoute: generateRoute),
     );
