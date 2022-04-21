@@ -250,13 +250,13 @@ class _PreviewDetailsState extends State<PreviewDetails> {
   Widget _buildDesignationWidget(String label){
     return Container(
         width: MediaQuery.of(context).size.width/1.2,
-        child: Text(label, style: Theme.of(context!).primaryTextTheme.subtitle1?.apply(color: Colors.black87,fontSizeDelta: 3, fontWeightDelta: 2),));
+        child: Text(label, style: Theme.of(context).primaryTextTheme.subtitle1?.apply(color: Colors.black87,fontSizeDelta: 3, fontWeightDelta: 2),));
   }
 
   Widget _buildLabelWidget(String label){
     return Container(
         width: MediaQuery.of(context).size.width/1.2,
-        child: Text(label,style: Theme.of(context!).primaryTextTheme.subtitle1?.apply(color: Colors.grey[600],fontSizeDelta: 2,)));
+        child: Text(label,style: Theme.of(context).primaryTextTheme.subtitle1?.apply(color: Colors.grey[600],fontSizeDelta: 2,)));
   }
 
   Widget _buildLabelAndTextWidget(String label, String text){

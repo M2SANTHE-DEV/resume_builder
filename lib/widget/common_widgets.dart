@@ -11,7 +11,9 @@ class CommonWidget {
   }
 
   Widget buildLabelText(String text, {Color? fontColor}){
-    return Text(text, style: Theme.of(navigatorKey.currentContext!).primaryTextTheme.subtitle1?.apply(color: fontColor ?? Colors.black,fontSizeDelta: 2));
+    return Container(
+        width: MediaQuery.of(navigatorKey.currentContext!).size.width/1.2,
+        child: Text(text, style: Theme.of(navigatorKey.currentContext!).primaryTextTheme.subtitle1?.apply(color: fontColor ?? Colors.black,fontSizeDelta: 2)));
   }
 
   void successDialogBox(BuildContext context) {
