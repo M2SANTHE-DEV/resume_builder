@@ -88,7 +88,7 @@ class ResumeProvider extends ChangeNotifier {
         lastDate:  DateTime.now());
     if (picked != null) {
       controller.text =
-          DateFormat("dd-MM-yyyy").format(picked).toString();
+          DateFormat("dd-MMM-yyyy").format(picked).toString();
     }
   }
 
@@ -100,6 +100,7 @@ class ResumeProvider extends ChangeNotifier {
     keySkillsController.clear();
     dobController.clear();
     permanentAddressController.clear();
+    profileSummeryController.clear();
     hometownController.clear();
     pincodeController.clear();
     martialStatusController.clear();

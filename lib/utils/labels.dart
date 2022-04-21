@@ -1,13 +1,14 @@
 class Labels {
   static const String resumeDetails = "Resume Details";
   static const String previewResumeDetails = "Preview Resume Details";
-  static const String details = 'Details';
+  static const String details = ' Details';
   static const String resumeHeadLine = 'Resume Headline';
   static const String hintResumeHeadLine = 'Type Resume Headline';
   static const String keySkills = 'Key Skills';
   static const String designation = 'Your Designation';
   static const String organization = 'Your Organization';
-  static const String type = 'Type ';
+  static const String type = 'Enter ';
+  static const String skillsHint = 'Eg: Java, Microsoft etc ';
   static const String add = 'ADD ';
   static const String employment = 'Employment ';
   static const String currentCompany = 'Is this your current company? ';
@@ -20,6 +21,7 @@ class Labels {
   static const String describe = 'Describe your Job Profile';
   static const String noticePeriod = 'Notice Period';
   static const String inMonths = ' In Months';
+  static const String inDays = ' In Days';
   static const String education = 'Education ';
   static const String course = 'Course ';
   static const String specialization = 'Specialization ';
@@ -46,4 +48,6 @@ class Labels {
   static const String submit = 'Submit';
   static const String preview = 'Preview';
   static const String okay = 'Okay';
+  static const String done = 'Done';
+  static const String successMessage = "Successfully Submitted Resume \n Good Luck...!";
 }

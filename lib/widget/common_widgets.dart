@@ -11,7 +11,7 @@ class CommonWidget {
   }
 
   Widget buildLabelText(String text, {Color? fontColor}){
-    return Text(text, style: Theme.of(navigatorKey.currentContext!).textTheme.subtitle1?.apply(color: fontColor ?? Colors.black,fontSizeDelta: 1));
+    return Text(text, style: Theme.of(navigatorKey.currentContext!).primaryTextTheme.subtitle1?.apply(color: fontColor ?? Colors.black,fontSizeDelta: 2));
   }
 
   void successDialogBox(BuildContext context) {
@@ -39,14 +39,14 @@ class CommonWidget {
                       color: Colors.green,
                     ),
                   ),
-                  const Text(
-                    'Done',
+                  Text(
+                    Labels.done,
+                      style: Theme.of(navigatorKey.currentContext!).primaryTextTheme.subtitle1?.apply(color: Colors.black,fontSizeDelta: 2, fontWeightDelta: 2)
                   ),
                 ],
               ),
               contentPadding: const EdgeInsets.all(0),
               content: Container(
-                  padding: const EdgeInsets.only(bottom: 20),
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -55,18 +55,14 @@ class CommonWidget {
                   child: Container(
                       color: Colors.white,
                       padding: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 10),
-                      child: RichText(
+                          vertical: 10, horizontal: 10),
+                      child:  RichText(
                           textAlign: TextAlign.center,
-                          text: const TextSpan(
-                              style: TextStyle(
-                                  letterSpacing: 0.5,
-                                  fontSize: 15,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w500),
+                          text: TextSpan(
                               children: <TextSpan>[
-                                TextSpan(
-                                    text: "Successfully Submitted Resume Good Luck."),
+                                 TextSpan(
+                                    text: Labels.successMessage, style: Theme.of(navigatorKey.currentContext!).primaryTextTheme.subtitle1?.apply(color: Colors.black,fontSizeDelta: 2),
+                      ),
                               ]))))),
         );
       },
@@ -74,15 +70,13 @@ class CommonWidget {
   }
 
   buildSubmitButton() {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Center(child: OutlinedButton(onPressed: () {
-                    Provider.of<ResumeProvider>(navigatorKey.currentContext!,
-                            listen: false)
-                        .clearAllDetails();
-                    Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, Routes.resumeDetails, (Route<dynamic> route) => false,);
-      }, child: Text(Labels.okay.toUpperCase()))),
-    );
+    return Center(child: OutlinedButton(
+        onPressed: () {
+                  Provider.of<ResumeProvider>(navigatorKey.currentContext!,
+                          listen: false)
+                      .clearAllDetails();
+                  Navigator.pushNamedAndRemoveUntil(navigatorKey.currentContext!, Routes.resumeDetails, (Route<dynamic> route) => false,);
+    }, child: Text(Labels.okay.toUpperCase(), style: Theme.of(navigatorKey.currentContext!).primaryTextTheme.subtitle1?.apply(color: Colors.blue,fontWeightDelta: 3,fontSizeDelta: 2))));
   }
 
 

@@ -23,7 +23,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.black,
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context),
           tooltip: 'Increment',
           child: const Icon(Icons.edit_outlined),
         ),
@@ -78,7 +78,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
       direction: Axis.vertical,
       children: [
         CommonWidget().buildHeaderText(Labels.resumeHeadLine),
-        CommonWidget().buildLabelText(Provider.of<ResumeProvider>(context, listen: false).resumeHeadlineController.text),
+        CommonWidget().buildLabelText(Provider.of<ResumeProvider>(context, listen: false).resumeHeadlineController.text, fontColor: Colors.grey[600]),
       ],
     );
   }
@@ -90,7 +90,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
       direction: Axis.vertical,
       children: [
         CommonWidget().buildHeaderText(Labels.keySkills),
-        CommonWidget().buildLabelText(Provider.of<ResumeProvider>(context, listen: false).keySkillsController.text),
+        CommonWidget().buildLabelText(Provider.of<ResumeProvider>(context, listen: false).keySkillsController.text, fontColor: Colors.grey[600]),
       ],
     );
   }
@@ -104,7 +104,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
         Consumer<ResumeProvider>(builder: (_, provider, child) =>
             Wrap(
                 direction: Axis.vertical,
-                spacing: 10,
+                spacing: 23,
                 children: [
                   ...List.generate(provider.employmentDetails.length,
                           (index) => _buildEachEmploymentDetail(index, provider.employmentDetails)),
@@ -123,7 +123,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
         Consumer<ResumeProvider>(builder: (_, provider, child) =>
             Wrap(
                 direction: Axis.vertical,
-                spacing: 10,
+                spacing: 23,
                 children: [
                   ...List.generate(provider.projectDetails.length,
                           (index) => _buildEachProjectDetail(index, provider.projectDetails)),
@@ -176,7 +176,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
         Consumer<ResumeProvider>(builder: (_, provider, child) =>
             Wrap(
                 direction: Axis.vertical,
-                spacing: 10,
+                spacing: 23,
                 children: [
                   ...List.generate(provider.educationDetails.length,
                           (index) => _buildEachEducationDetail(index, provider.educationDetails)),
@@ -224,7 +224,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
       spacing: 10,
       children: [
         _buildDesignationWidget(projectDetails[index].projectTitleController.text),
-        _buildLabelWidget("Project is " + projectDetails[index].projectStatus),
+        _buildLabelWidget("Project is " + projectDetails[index].projectStatus.toLowerCase()),
         _buildPeriodWidget(projectDetails[index].projectStartDateController.text,
             projectDetails[index].projectEndDateController.text, projectDetails[index].projectStatus == Constants.projectStatus.first.value),
         _buildLabelWidget(projectDetails[index].clientController.text),
@@ -248,11 +248,15 @@ class _PreviewDetailsState extends State<PreviewDetails> {
     );
   }
   Widget _buildDesignationWidget(String label){
-    return Text(label);
+    return Container(
+        width: MediaQuery.of(context).size.width/1.2,
+        child: Text(label, style: Theme.of(context!).primaryTextTheme.subtitle1?.apply(color: Colors.black87,fontSizeDelta: 3, fontWeightDelta: 2),));
   }
 
   Widget _buildLabelWidget(String label){
-    return Text(label);
+    return Container(
+        width: MediaQuery.of(context).size.width/1.2,
+        child: Text(label,style: Theme.of(context!).primaryTextTheme.subtitle1?.apply(color: Colors.grey[600],fontSizeDelta: 2,)));
   }
 
   Widget _buildLabelAndTextWidget(String label, String text){
@@ -260,7 +264,7 @@ class _PreviewDetailsState extends State<PreviewDetails> {
       direction: Axis.vertical,
       spacing: 8,
       children: [
-        CommonWidget().buildLabelText(label),
+        CommonWidget().buildLabelText(label, fontColor: Colors.black87),
         _buildLabelWidget(text)
       ],
     );
@@ -272,9 +276,11 @@ class _PreviewDetailsState extends State<PreviewDetails> {
       child: Container(
         width: MediaQuery.of(context).size.width/1.2,
         child: Center(
-          child: Center(child: OutlinedButton(onPressed: () {
+          child: Center(child: OutlinedButton(
+              onPressed: () {
             CommonWidget().successDialogBox(context);
-          }, child: Text(Labels.submit.toUpperCase()))),
+          },
+              child: Text(Labels.submit.toUpperCase()))),
         ),
       ),
     );

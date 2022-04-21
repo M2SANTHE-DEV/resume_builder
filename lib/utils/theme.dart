@@ -1,9 +1,14 @@
+import 'package:build_resume/utils/global_variable.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 class CustomTheme {
   static ThemeData theme() {
     return ThemeData(
+      primaryTextTheme: GoogleFonts.latoTextTheme(
+        Theme.of(navigatorKey.currentContext!).textTheme,
+      ),
       primaryColor: Colors.black,
       inputDecorationTheme: InputDecorationTheme(
           hintStyle: const TextStyle(fontSize: 16.0, color: Colors.grey, fontWeight: FontWeight.normal),
@@ -41,25 +46,10 @@ class CustomTheme {
               borderRadius: BorderRadius.all(Radius.circular(12)),
               borderSide: BorderSide(width: 2, color: Colors.grey)),
           contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10)),
-
-      buttonTheme: const ButtonThemeData(
-          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
-          buttonColor: Colors.black,
-          textTheme: ButtonTextTheme.primary,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)))),
-
       textButtonTheme: const TextButtonThemeData(
       ),
-
       textTheme: const TextTheme(
           button: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 2, fontSize: 20)),
-
-      dividerTheme: const DividerThemeData(
-          color: Color.fromRGBO(0, 0, 0, 0.16),
-          thickness: 1.5
-      ),
-
       cardTheme: CardTheme(
         color: Colors.white,
         shape: RoundedRectangleBorder(

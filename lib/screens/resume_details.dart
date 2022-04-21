@@ -35,11 +35,12 @@ class _ResumeDetailsState extends State<ResumeDetails> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        shadowColor: Colors.white,
+        // elevation: 0,
+        shadowColor: Colors.black,
         backgroundColor: Colors.black,
         title: Text(Labels.resumeDetails,
             style: Theme.of(context).textTheme.subtitle2?.apply(
-                color: Colors.white, fontSizeDelta: 8, fontWeightDelta: 1)),
+                color: Colors.white, fontSizeDelta: 10, fontWeightDelta: 2)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -48,12 +49,12 @@ class _ResumeDetailsState extends State<ResumeDetails> {
           child: Wrap(
             runSpacing: 24,
             children: [
-              BuildTextField(Labels.resumeHeadLine, provider.resumeHeadlineController,hint: Labels.hintResumeHeadLine, maxLines: 5,applyStyling : headLineStyling),
+              BuildTextField(Labels.resumeHeadLine, provider.resumeHeadlineController,hint: Labels.hintResumeHeadLine, maxLines: 5,applyStyling : headLineStyling,maxLength: 255),
               BuildTextField(Labels.keySkills, provider.keySkillsController,hint: Labels.type + Labels.keySkills, maxLines: 5,applyStyling : headLineStyling),
               _buildEmployment(),
               _buildEducation(),
               _buildProjectDetails(),
-              BuildTextField(Labels.profileSummery, provider.profileSummeryController,hint: Labels.type + Labels.profileSummery,maxLines: 5,applyStyling: Theme.of(context).textTheme.subtitle1?.apply(color: Colors.black,fontSizeDelta: 6,fontSizeFactor: 1.2, fontWeightDelta: 2),),
+              BuildTextField(Labels.profileSummery, provider.profileSummeryController,hint: Labels.type + Labels.profileSummery,maxLines: 5,applyStyling: Theme.of(context).textTheme.subtitle1?.apply(color: Colors.black,fontSizeDelta: 6,fontSizeFactor: 1.2, fontWeightDelta: 2),maxLength: 255,),
               _buildPersonalDetails(),
               _buildSubmitButton()
             ],
@@ -131,9 +132,10 @@ class _ResumeDetailsState extends State<ResumeDetails> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           CommonWidget().buildLabelText(label, fontColor : Colors.blue),
+          const SizedBox(width: 4,),
           Container(
-            width: 38,
-            height: 40,
+            width: 28,
+            height: 30,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(50),
@@ -151,7 +153,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
               icon: const Icon(
                 Icons.add,
                 color: Colors.blue,
-                size: 21,
+                size: 12,
               ),
               onPressed: () => callBack() ,
             ),
@@ -213,10 +215,10 @@ class _ResumeDetailsState extends State<ResumeDetails> {
         children: [
           BuildTextField(Labels.projectTitle, provider.projectDetails[index].projectTitleController,hint: Labels.type + Labels.projectTitle,),
           BuildTextField(Labels.tagProject, provider.projectDetails[index].projectEducationEmploymentController,hint: Labels.type + Labels.tagProject,),
-          BuildTextField(Labels.client, provider.projectDetails[index].clientController,hint: Labels.type + Labels.client,),
+          BuildTextField(Labels.client, provider.projectDetails[index].clientController,hint: Labels.type + Labels.client + Labels.details,),
           _buildCurrentProjectStatus(provider.projectDetails[index]),
           _buildExperienceDetails(index,projectDetail : provider.projectDetails[index]),
-          BuildTextField(Labels.projectDetails, provider.projectDetails[index].projectDetailsController,hint: Labels.type + Labels.projectDetails,textInputType: TextInputType.text, maxLines: 5,),
+          BuildTextField(Labels.projectDetails, provider.projectDetails[index].projectDetailsController,hint: Labels.type + Labels.projectDetails,textInputType: TextInputType.text, maxLines: 5,maxLength: 300),
         ],
       ),
     );
@@ -236,9 +238,9 @@ class _ResumeDetailsState extends State<ResumeDetails> {
           _buildCurrentCompanyDetails(provider.employmentDetails[index]),
           _buildExperienceDetails(index,employmentDetail : provider.employmentDetails[index]),
           BuildTextField(Labels.currentSalary, provider.employmentDetails[index].salaryController,hint: Labels.type + Labels.currentSalary,textInputType: TextInputType.number,),
-          BuildTextField(Labels.topSkills, provider.employmentDetails[index].skillsController,hint: Labels.type + Labels.topSkills,),
-          BuildTextField(Labels.describe, provider.employmentDetails[index].jobProfileController,hint:  Labels.describe,maxLines: 5,),
-          BuildTextField(Labels.noticePeriod, provider.employmentDetails[index].noticePeriodController,hint: Labels.type + Labels.noticePeriod + Labels.inMonths,textInputType: TextInputType.number),
+          BuildTextField(Labels.topSkills, provider.employmentDetails[index].skillsController,hint: Labels.skillsHint,maxLength: 160,),
+          BuildTextField(Labels.describe, provider.employmentDetails[index].jobProfileController,hint:  Labels.describe,maxLines: 5,maxLength: 255,),
+          BuildTextField(Labels.noticePeriod, provider.employmentDetails[index].noticePeriodController,hint: Labels.type + Labels.noticePeriod + Labels.inDays,textInputType: TextInputType.number),
         ],
       ),
     );
@@ -246,6 +248,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
 
   Widget _buildExperienceDetails(int index,
       {EmploymentDetails? employmentDetail, ProjectDetails? projectDetail}){
+    var provider = Provider.of<ResumeProvider>(context, listen: false);
 
     var startDateController = TextEditingController();
     var endDateController = TextEditingController();
@@ -254,13 +257,13 @@ class _ResumeDetailsState extends State<ResumeDetails> {
       startDateController = employmentDetail.startDateController;
       endDateController = employmentDetail.endDateController;
       endDateController.text =
-          DateFormat("dd-MM-yyyy").format(DateTime.now()).toString();
+          DateFormat("dd-MMM-yyyy").format(DateTime.now()).toString();
     }
     if(projectDetail != null && projectDetail.projectStatus == Constants.projectStatus.first.value) {
       startDateController = projectDetail.projectStartDateController;
       endDateController = projectDetail.projectEndDateController;
       endDateController.text =
-          DateFormat("dd-MM-yyyy").format(DateTime.now()).toString();
+          DateFormat("dd-MMM-yyyy").format(DateTime.now()).toString();
     }
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -268,7 +271,7 @@ class _ResumeDetailsState extends State<ResumeDetails> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _buildDateTextField(Labels.startDate,startDateController, index),
-          _buildDateTextField(Labels.endDate, endDateController,index, endDate: true, projectDetail: projectDetail)
+          _buildDateTextField(!(projectDetail != null ? provider.projectDetails[index].projectStatus != Constants.projectStatus.first.value : provider.employmentDetails[index].currentCompany != Constants.companyDetails.first.value) ? Labels.workedTill :  Labels.endDate, endDateController,index, endDate: true, projectDetail: projectDetail)
         ],
       ),
     );
